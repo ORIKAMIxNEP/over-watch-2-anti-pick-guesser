@@ -25,7 +25,7 @@ def IdentifyHeroes(heroNames):
 
                 similarity = cv2.matchTemplate(
                     originalImage, templateImage, cv2.TM_CCOEFF_NORMED)[0][0]
-                if similarity > 0.8 and similarity > maxSimilarity:
+                if similarity > 0.9 and similarity > maxSimilarity:
                     maxSimilarity = similarity
                     identifiedHeroIndex[j] = k
             maxSimilarity = 0
