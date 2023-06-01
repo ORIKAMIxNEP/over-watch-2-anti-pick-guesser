@@ -1,9 +1,9 @@
 let keydownFlag = false;
 
-window.addEventListener("keydown", async function (event) {
-  if (event.code == "Tab" && !keydownFlag) {
-    const data = await eel.GuessAntiPick()();
+setInterval(async function () {
+  const data = await eel.GuessAntiPick()();
 
+  if (data.hasOwnProperty("antiPoints")) {
     const enemyHeroes = data["enemyHeroes"];
     let enemyHeroesHTML = "";
     for (let i = 0; i < enemyHeroes.length; i++) {
@@ -11,22 +11,30 @@ window.addEventListener("keydown", async function (event) {
     }
     document.getElementById("enemy_heroes").innerHTML = enemyHeroesHTML;
 
-    if (data.hasOwnProperty("antiPoints")) {
-      const antiPoints = data["antiPoints"];
-      antiPoints.sort(
-        (element1, element2) => element2.points - element1.points
-      );
-      let recommendedHeroesHTML = "";
-      for (let i = 0; i < 5; i++) {
-        recommendedHeroesHTML += antiPoints[i]["name"] + "<br>";
+    antiPoints = {};
+    data["antiPoints"].forEach((item) => {
+      if (!antiPoints[item.role]) {
+        antiPoints[item.role] = [];
       }
-      document.getElementById("recommended_heroes").innerHTML =
-        recommendedHeroesHTML;
+      antiPoints[item.role].push(item);
+    });
+    for (const role in antiPoints) {
+      antiPoints[role].sort((a, b) => b.points - a.points);
     }
 
-    keydownFlag = true;
+    let recommendedHeroesHTML = "";
+    for (const role in antiPoints) {
+      recommendedHeroesHTML +=
+        "<p>【" + role.charAt(0).toUpperCase() + role.slice(1) + "】</p>";
+      antiPoints[role].slice(0, 5).forEach((item, index) => {
+        recommendedHeroesHTML +=
+          index + 1 + ". " + item.name.replace("_", " ") + "<br>";
+      });
+    }
+    document.getElementById("recommended_heroes").innerHTML =
+      recommendedHeroesHTML;
   }
-});
+}, 1000);
 
 document.addEventListener("keyup", function (event) {
   if (event.code == "Tab") {
