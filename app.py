@@ -35,4 +35,4 @@ def GuessAntiPick():
 
 
 eel.init("web")
-eel.start("index.html", size=(800, 600))
+eel.start("index.html", size=(480, 1080))
