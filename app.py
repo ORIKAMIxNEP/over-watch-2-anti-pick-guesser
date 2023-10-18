@@ -4,8 +4,45 @@ from python.CalculateAntiPoints import CalculateAntiPoints
 from python.CropScoreboard import CropScoreboard
 from python.IdentifyHeroes import IdentifyHeroes
 
-heroNames = ["D.Va", "Winston", "Orisa", "Zarya", "Sigma", "Junker_Queen", "Doomfist", "Reinhart", "Ramattra", "Wrecking_Ball", "Roadhog", "Ashe", "Widowmaker", "Echo", "Cassidy", "Genji", "Symmetra",
-             "Junkrat", "Sojourn", "Soldier76", "Sombra", "Torbjorn", "Tracer", "Hanzo", "Bastion", "Pharah", "Mei", "Reaper", "Ana", "Kiriko", "Zenyatta", "Baptiste", "Brigitte", "Mercy", "Moira", "Lifeweaver", "Lucio"]
+heroNames = [
+    "D.Va",
+    "Winston",
+    "Orisa",
+    "Zarya",
+    "Sigma",
+    "Junker_Queen",
+    "Doomfist",
+    "Reinhart",
+    "Ramattra",
+    "Wrecking_Ball",
+    "Roadhog",
+    "Ashe",
+    "Widowmaker",
+    "Echo",
+    "Cassidy",
+    "Genji",
+    "Symmetra",
+    "Junkrat",
+    "Sojourn",
+    "Soldier76",
+    "Sombra",
+    "Torbjorn",
+    "Tracer",
+    "Hanzo",
+    "Bastion",
+    "Pharah",
+    "Mei",
+    "Reaper",
+    "Ana",
+    "Kiriko",
+    "Zenyatta",
+    "Baptiste",
+    "Brigitte",
+    "Mercy",
+    "Moira",
+    "Lifeweaver",
+    "Lucio",
+]
 roleCounts = {"tank": 11, "damage": 17, "support": 9}
 
 
@@ -15,8 +52,9 @@ def GuessAntiPick():
     temporaryHeroNames = heroNames.copy()
     for roleName, roleCount in roleCounts.items():
         for i in range(roleCount):
-            antiPoints.append({"name": temporaryHeroNames.pop(
-                0), "points": 0, "role": roleName})
+            antiPoints.append(
+                {"name": temporaryHeroNames.pop(0), "points": 0, "role": roleName}
+            )
 
     CropScoreboard()
     enemyHeroesIndex = IdentifyHeroes(heroNames)
