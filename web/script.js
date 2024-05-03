@@ -1,7 +1,7 @@
 let keydownFlag = false;
 
 setInterval(async function () {
-  const data = await eel.GuessAntiPick()();
+  const data = await eel.GuessAntipick()();
 
   if (data.hasOwnProperty("antiPoints")) {
     const enemyHeroes = data["enemyHeroes"];
