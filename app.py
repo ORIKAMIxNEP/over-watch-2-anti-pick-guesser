@@ -47,7 +47,7 @@ roleCounts = {"tank": 11, "damage": 17, "support": 9}
 
 
 @eel.expose
-def GuessAntiPick():
+def GuessAntipick():
     antiPoints = []
     temporaryHeroNames = heroNames.copy()
     for roleName, roleCount in roleCounts.items():
